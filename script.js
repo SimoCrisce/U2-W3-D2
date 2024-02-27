@@ -23,11 +23,13 @@ deleteBtn.addEventListener("click", del);
 
 const storageCounter = "counter-memory";
 
-let counter = 0;
+let counter = JSON.parse(sessionStorage.getItem(storageCounter)) || 0;
+
 setInterval(() => {
-  localStorage.setItem(storageCounter, counter++);
-  counterTitle.innerText = localStorage.getItem(storageCounter);
-  console.log(localStorage.getItem(storageCounter));
+  sessionStorage.setItem(storageCounter, counter);
+  counterTitle.innerText = counter;
+  console.log(sessionStorage.getItem(storageCounter));
+  counter++;
 }, 1000);
 
 const counterTitle = document.querySelector("h2");
@@ -35,4 +37,5 @@ const counterTitle = document.querySelector("h2");
 window.onload = () => {
   userName.value = localStorage.getItem(storageKey);
   insertedName.innerText = localStorage.getItem(storageKey);
+  counterTitle.innerText = sessionStorage.getItem(storageCounter);
 };
